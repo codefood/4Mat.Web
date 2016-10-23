@@ -1,0 +1,80 @@
+@{
+    ViewData["Title"] = "4MAT Document Uploader";
+}
+
+<div ng-controller="mainCtrl">
+    <div class="validationRules">
+        <button ng-click="loadRules()">Load Validation Rules</button>
+        <table ng-if="rules && rules.length > 0">
+            <thead>
+                <tr>
+                    <th>Field Name</th>
+                    <th>Required</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="rule in rules">
+                    <td>{{ rule.fieldName }}</td>
+                    <td>{{ rule.required }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br />
+    <form>
+        <div class="form-group">
+            <label>Candidate Id</label>
+            <input type="text" ng-model="candidateId" />
+        </div>
+        <div class="form-group">
+            <label>Employer Id</label>
+            <input type="text" ng-model="employerId" />
+        </div>
+        <div class="form-group">
+            <label>Document Type</label>
+            <select ng-model="documentType" ng-options="docType.key for docType in documentTypes">
+            </select>
+        </div>
+        <input type="file" file="file"/>
+        <button ng-click="upload()">Upload Documents</button>
+    </form>
+    <br />
+    <form>
+        <div class="form-group">
+            <label>Candidate Id</label>
+            <input type="text" ng-model="candidateId" />
+        </div>
+        <button ng-click="view()">View Documents</button>
+        <table ng-if="documents && documents.length > 0">
+            <thead>
+                <tr>
+                    <th>
+                        Candidate Id
+                    </th>
+                    <th>
+                        Document File Name
+                    </th>
+                    <th>
+                        Extension
+                    </th>
+                    <th>
+                        Creation Date (UTC)
+                    </th>
+                    <th>
+                        Document Type
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="doc in documents">
+                    <td>{{ doc.candidateId }}</td>
+                    <td>{{ doc.documentFileName }}</td>
+                    <td>{{ doc.documentFileExtension }}</td>
+                    <td>{{ doc.creationDate }}</td>
+                    <td>{{ doc.documentType }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    
+</div>
